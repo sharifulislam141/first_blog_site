@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %} Create new account {% endblock title %}
+
+{% block body_block %}
+{% if registered %}
+<h3 class="alert alert-success text-center"> Account Created Successfully</h3>
+{% else %}
+<h3>Create New Account</h3>
+<form method="POST">
+    {{ form.as_p }}  {% csrf_token %}  <button type="submit">Register</button>  </form>
+    {% for error in form.errors %}
+        <p style="color: red;">{{ error }}</p>
+    {% endfor %}
+<br>
+<p> Already have an account? <a class="btn btn-primary" href="#">Login</a></p>
+{% endif %}
+{% endblock body_block %}

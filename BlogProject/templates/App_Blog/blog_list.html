@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Blog Posts{% endblock %}
+
+{% block body_block %}
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for blog in blogs %}
+    <div class="col">
+        <div class="card h-100">
+            
+            <img src="{{ blog.blog_image.url }}" class="card-img-top" alt="{{ blog.blog_title }}">
+            <div class="card-body">
+                <h5 class="card-title"><a href="#">{{ blog.blog_title }}</a></h5>
+                <p class="card-text">{{ blog.blog_content|linebreaks|truncatechars:200 }}</p> </div>
+                <h6 class="m-2 p-2">{{blog.liked_blog.count}} Likes | {{blog.blog_comment.count}} Comments </h6>
+            <div class="card-footer d-flex justify-content-between">
+                <p><small class="text-muted">Published on {{ blog.publish_date|date:"F d, Y" }}</small> </p>
+               {% comment %} <p> <small class="text-muted">Updated on {{ blog.update_date|date:"F d, Y" }}</small></p> {% endcomment %}
+                <a href="{% url "App_Blog:details_blog" pk=blog.pk %}" class="btn btn-primary btn-sm">Read More</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %} Profile {% endblock title %}
+
+{% block body_block %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="text-center">
+                {% if user.user_profile %}
+                    <img class="rounded-circle img-thumbnail" width="150px" src="/media/{{user.user_profile.profile_pic}}">
+                    <br>
+                    <a href="{% url 'App_Login:change_profile' %}" class="btn btn-info mt-3">Change Picture</a>
+                {% else %}
+                    <img class="rounded-circle img-thumbnail" width="150px" src="/media/profile_pic/pp.jpg">
+                    <br>
+                    <a href="{% url 'App_Login:add_profile' %}" class="btn btn-info mt-3">Change Picture</a>
+                {% endif %}
+
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h3 class="mb-4">Profile Information</h3>
+            <div class="card">
+                <div class="card-body">
+                    <h4><i class="fas fa-user"></i> Username: {{user.username}}</h4>
+                    <h4><i class="fas fa-envelope"></i> Email: {{user.email}}</h4>
+                    <h4><i class="fas fa-id-badge"></i> Name: {{user.first_name}} {{user.last_name}}</h4>
+                    <div class="mt-4">
+                        <a class="btn btn-primary" href="{% url 'App_Login:changeprofile' %}"><i class="fas fa-edit"></i> Change Profile</a>
+                        <a class="btn btn-warning" href="{% url 'App_Login:changepass' %}"><i class="fas fa-key"></i> Change Password</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body_block %}
